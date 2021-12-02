@@ -27,7 +27,7 @@
           <Property Name="Class_Id" Type="int" Nullable="false" />
           <Property Name="Teacher_Id" Type="int" Nullable="false" />
           <Property Name="date" Type="date" />
-          <Property Name="time" Type="time" Precision="7" />
+          <Property Name="time" Type="nvarchar" MaxLength="15" />
         </EntityType>
         <EntityType Name="Students">
           <Key>
@@ -57,7 +57,7 @@
           <Property Name="tch_first_name" Type="nvarchar" MaxLength="20" />
           <Property Name="tch_middle_name" Type="nvarchar" MaxLength="20" />
         </EntityType>
-        <Association Name="FK__Schedule__Class___32E0915F">
+        <Association Name="FK__Schedule__Class___36B12243">
           <End Role="Classes" Type="Self.Classes" Multiplicity="1" />
           <End Role="Schedule" Type="Self.Schedule" Multiplicity="*" />
           <ReferentialConstraint>
@@ -69,7 +69,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Schedule__Teache__33D4B598">
+        <Association Name="FK__Schedule__Teache__37A5467C">
           <End Role="Teachers" Type="Self.Teachers" Multiplicity="1" />
           <End Role="Schedule" Type="Self.Schedule" Multiplicity="*" />
           <ReferentialConstraint>
@@ -124,11 +124,11 @@
           <EntitySet Name="Students" EntityType="Self.Students" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Subjects" EntityType="Self.Subjects" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Teachers" EntityType="Self.Teachers" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__Schedule__Class___32E0915F" Association="Self.FK__Schedule__Class___32E0915F">
+          <AssociationSet Name="FK__Schedule__Class___36B12243" Association="Self.FK__Schedule__Class___36B12243">
             <End Role="Classes" EntitySet="Classes" />
             <End Role="Schedule" EntitySet="Schedule" />
           </AssociationSet>
-          <AssociationSet Name="FK__Schedule__Teache__33D4B598" Association="Self.FK__Schedule__Teache__33D4B598">
+          <AssociationSet Name="FK__Schedule__Teache__37A5467C" Association="Self.FK__Schedule__Teache__37A5467C">
             <End Role="Teachers" EntitySet="Teachers" />
             <End Role="Schedule" EntitySet="Schedule" />
           </AssociationSet>
@@ -164,7 +164,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Number" Type="String" MaxLength="4" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Schedule" Relationship="Self.FK__Schedule__Class___32E0915F" FromRole="Classes" ToRole="Schedule" />
+          <NavigationProperty Name="Schedule" Relationship="Self.FK__Schedule__Class___36B12243" FromRole="Classes" ToRole="Schedule" />
           <NavigationProperty Name="Students" Relationship="Self.FK__Students__Class___2C3393D0" FromRole="Classes" ToRole="Students" />
         </EntityType>
         <EntityType Name="Schedule">
@@ -175,9 +175,9 @@
           <Property Name="Class_Id" Type="Int32" Nullable="false" />
           <Property Name="Teacher_Id" Type="Int32" Nullable="false" />
           <Property Name="date" Type="DateTime" Precision="0" />
-          <Property Name="time" Type="Time" Precision="7" />
-          <NavigationProperty Name="Classes" Relationship="Self.FK__Schedule__Class___32E0915F" FromRole="Schedule" ToRole="Classes" />
-          <NavigationProperty Name="Teachers" Relationship="Self.FK__Schedule__Teache__33D4B598" FromRole="Schedule" ToRole="Teachers" />
+          <Property Name="time" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Classes" Relationship="Self.FK__Schedule__Class___36B12243" FromRole="Schedule" ToRole="Classes" />
+          <NavigationProperty Name="Teachers" Relationship="Self.FK__Schedule__Teache__37A5467C" FromRole="Schedule" ToRole="Teachers" />
         </EntityType>
         <EntityType Name="Students">
           <Key>
@@ -209,7 +209,7 @@
           <Property Name="tch_first_name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="tch_middle_name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Cabinets" Relationship="Self.FK__Teachers__Cab_Id__300424B4" FromRole="Teachers" ToRole="Cabinets" />
-          <NavigationProperty Name="Schedule" Relationship="Self.FK__Schedule__Teache__33D4B598" FromRole="Teachers" ToRole="Schedule" />
+          <NavigationProperty Name="Schedule" Relationship="Self.FK__Schedule__Teache__37A5467C" FromRole="Teachers" ToRole="Schedule" />
           <NavigationProperty Name="Subjects" Relationship="Self.FK__Teachers__Subjec__2F10007B" FromRole="Teachers" ToRole="Subjects" />
         </EntityType>
         <Association Name="FK__Teachers__Cab_Id__300424B4">
@@ -224,7 +224,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Schedule__Class___32E0915F">
+        <Association Name="FK__Schedule__Class___36B12243">
           <End Role="Classes" Type="Self.Classes" Multiplicity="1" />
           <End Role="Schedule" Type="Self.Schedule" Multiplicity="*" />
           <ReferentialConstraint>
@@ -248,7 +248,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Schedule__Teache__33D4B598">
+        <Association Name="FK__Schedule__Teache__37A5467C">
           <End Role="Teachers" Type="Self.Teachers" Multiplicity="1" />
           <End Role="Schedule" Type="Self.Schedule" Multiplicity="*" />
           <ReferentialConstraint>
@@ -283,7 +283,7 @@
             <End Role="Cabinets" EntitySet="Cabinets" />
             <End Role="Teachers" EntitySet="Teachers" />
           </AssociationSet>
-          <AssociationSet Name="FK__Schedule__Class___32E0915F" Association="Self.FK__Schedule__Class___32E0915F">
+          <AssociationSet Name="FK__Schedule__Class___36B12243" Association="Self.FK__Schedule__Class___36B12243">
             <End Role="Classes" EntitySet="Classes" />
             <End Role="Schedule" EntitySet="Schedule" />
           </AssociationSet>
@@ -291,7 +291,7 @@
             <End Role="Classes" EntitySet="Classes" />
             <End Role="Students" EntitySet="Students" />
           </AssociationSet>
-          <AssociationSet Name="FK__Schedule__Teache__33D4B598" Association="Self.FK__Schedule__Teache__33D4B598">
+          <AssociationSet Name="FK__Schedule__Teache__37A5467C" Association="Self.FK__Schedule__Teache__37A5467C">
             <End Role="Teachers" EntitySet="Teachers" />
             <End Role="Schedule" EntitySet="Schedule" />
           </AssociationSet>

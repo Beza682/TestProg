@@ -5,8 +5,292 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TestProg"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Журнал" Height="470" Width="850" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
     <Grid>
-        
+        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+            <TabControl>
+                <TabItem Header="Расписание" Height="23" Margin="-2,-2,-2,-0.2" VerticalAlignment="Bottom">
+                    <Grid>
+                        <DataGrid Name="SchedGrid" AutoGenerateColumns="False" Margin="10,10,270,10" IsReadOnly="True">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Binding="{Binding date, StringFormat={}{0:dd.MM.yyyy}}" Header="Дата"/>
+                                <DataGridTextColumn Binding="{Binding time}" Header="Время"/>
+                                <DataGridTextColumn Binding="{Binding Classes.Number}" Header="Класс"/>
+                                <DataGridTextColumn Binding="{Binding Teachers.Subjects.Name}" Header="Предмет"/>
+                                <DataGridTextColumn Binding="{Binding Teachers.Cabinets.Cab}" Header="Кабинет"/>
+                                <DataGridTextColumn Header="Преподаватель">
+                                    <DataGridTextColumn.Binding>
+                                        <MultiBinding StringFormat="{}{0} {1} {2}">
+                                            <Binding Path="Teachers.tch_last_name"/>
+                                            <Binding Path="Teachers.tch_first_name"/>
+                                            <Binding Path="Teachers.tch_middle_name" />
+                                        </MultiBinding>
+                                    </DataGridTextColumn.Binding>
+                                </DataGridTextColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                        <Grid Margin="0,35,30,10" HorizontalAlignment="Right" Width="208">
+                            <DatePicker Name="Date" PreviewTextInput="Date_Check" Margin="0,0,10,0" VerticalContentAlignment="Center" HorizontalAlignment="Right" Width="187" Height="30" VerticalAlignment="Top"/>
+                            <ComboBox Name="Time_Cb" Margin="0,35,10,0" VerticalContentAlignment="Center" HorizontalAlignment="Right" Width="187" Height="30" VerticalAlignment="Top"/>
+                            <TextBlock Name="WM_Time" Text="Время" IsHitTestVisible="False"  Height="17" VerticalAlignment="Top" Margin="0,42,80,0" HorizontalAlignment="Right" Width="111">
+                                <TextBlock.Style>
+                                    <Style TargetType="{x:Type TextBlock}">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Text, ElementName=Time_Cb}" Value="">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+
+                            <ComboBox Name="Class_Cb" Margin="0,70,10,0" VerticalContentAlignment="Center" HorizontalAlignment="Right" Width="187" Height="30" VerticalAlignment="Top" DisplayMemberPath="Number"/>
+                            <TextBlock Name="WM_Class" Text="Класс" IsHitTestVisible="False"  Height="17" VerticalAlignment="Top" Margin="0,77,80,0" HorizontalAlignment="Right" Width="111">
+                                <TextBlock.Style>
+                                    <Style TargetType="{x:Type TextBlock}">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Text, ElementName=Class_Cb}" Value="">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+
+                            <ComboBox Name="Subj_Cb" Margin="0,105,10,0" VerticalContentAlignment="Center" HorizontalAlignment="Right" Width="187" Height="30" VerticalAlignment="Top" DisplayMemberPath="Name" SelectionChanged="Subj_Cb_SelectionChanged"/>
+                            <TextBlock Name="WM_Subj" Text="Предмет" IsHitTestVisible="False"  Height="17" VerticalAlignment="Top" Margin="0,112,80,0" HorizontalAlignment="Right" Width="111">
+                                <TextBlock.Style>
+                                    <Style TargetType="{x:Type TextBlock}">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Text, ElementName=Subj_Cb}" Value="">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+
+                            <Grid x:Name="WM_Teach_and_Cb" Visibility="Collapsed">
+                                <ComboBox Name="Teach_Cb"  Margin="0,140,10,0" VerticalContentAlignment="Center" Height="30" VerticalAlignment="Top" HorizontalAlignment="Right" Width="187" DisplayMemberPath="tch_last_name"/>
+                                <TextBlock Name="WM_Teach" Text="Преподаватель" IsHitTestVisible="False"  Height="17" VerticalAlignment="Top" Margin="0,147,80,0" HorizontalAlignment="Right" Width="111">
+                                    <TextBlock.Style>
+                                        <Style TargetType="{x:Type TextBlock}">
+                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding Text, ElementName=Teach_Cb}" Value="">
+                                                    <Setter Property="Visibility" Value="Visible"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
+                            </Grid>
+
+                            <Button Content="Добавить" Margin="0,238,10,0" Click="Sched_Add" Height="30" VerticalAlignment="Top" HorizontalAlignment="Right" Width="187" />
+                            <Button Content="Изменить" Margin="0,273,10,0" Click="Sched_Update" Height="30" VerticalAlignment="Top" HorizontalAlignment="Right" Width="187" />
+                            <Button Content="Удалить" Margin="0,308,10,0" Click="Sched_Delete" HorizontalAlignment="Right" Width="187" Height="30" VerticalAlignment="Top" />
+
+                        </Grid>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Преподаватели">
+                    <Grid>
+                        <DataGrid Name="TeachGrid" AutoGenerateColumns="False" Margin="10,10,270,10" IsReadOnly="True">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Binding="{Binding tch_last_name}" Header="Фамилия"/>
+                                <DataGridTextColumn Binding="{Binding tch_first_name}" Header="Имя"/>
+                                <DataGridTextColumn Binding="{Binding tch_middle_name}" Header="Отчество"/>
+                                <DataGridTextColumn Binding="{Binding Subjects.Name}" Header="Предмет"/>
+                                <DataGridTextColumn Binding="{Binding Cabinets.Cab}" Header="Кабинет"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                        <Grid Margin="0,35,30,10" HorizontalAlignment="Right" Width="208">
+                            <TextBox Name="tch_last_name" PreviewTextInput="Cyr_Check" Margin="0,0,10,0" VerticalContentAlignment="Center" HorizontalAlignment="Right" Width="187" Height="30" VerticalAlignment="Top"/>
+                            <TextBlock Name="WM_tch_last_name" Text="Фамилия" IsHitTestVisible="False"  Height="17" VerticalAlignment="Top" Margin="0,7,80,0" HorizontalAlignment="Right" Width="111">
+                                <TextBlock.Style>
+                                    <Style TargetType="{x:Type TextBlock}">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Text, ElementName=tch_last_name}" Value="">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+
+                            <TextBox Name="tch_first_name" PreviewTextInput="Cyr_Check" Margin="0,35,10,0" VerticalContentAlignment="Center" HorizontalAlignment="Right" Width="187" Height="30" VerticalAlignment="Top"/>
+                            <TextBlock Name="WM_tch_first_name" Text="Имя" IsHitTestVisible="False"  Height="17" VerticalAlignment="Top" Margin="0,43,80,0" HorizontalAlignment="Right" Width="111">
+                                <TextBlock.Style>
+                                    <Style TargetType="{x:Type TextBlock}">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Text, ElementName=tch_first_name}" Value="">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+
+                            <TextBox Name="tch_middle_name" PreviewTextInput="Cyr_Check" Margin="0,70,10,0" VerticalContentAlignment="Center" HorizontalAlignment="Right" Width="187" Height="30" VerticalAlignment="Top"/>
+                            <TextBlock Name="WM_tch_middle_name" Text="Отчество" IsHitTestVisible="False"  Height="17" VerticalAlignment="Top" Margin="0,78,80,0" HorizontalAlignment="Right" Width="111">
+                                <TextBlock.Style>
+                                    <Style TargetType="{x:Type TextBlock}">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Text, ElementName=tch_middle_name}" Value="">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+
+                            <ComboBox Name="SubjTeach_Cb" Margin="0,105,45,0" VerticalContentAlignment="Center" HorizontalAlignment="Right" Width="152" Height="30" VerticalAlignment="Top" DisplayMemberPath="Name"/>
+                            <TextBlock Name="WM_SubjTeach" Text="Предмет" IsHitTestVisible="False"  Height="17" VerticalAlignment="Top" Margin="0,112,80,0" HorizontalAlignment="Right" Width="111">
+                                <TextBlock.Style>
+                                    <Style TargetType="{x:Type TextBlock}">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Text, ElementName=SubjTeach_Cb}" Value="">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+
+                            <ComboBox Name="Cab_Cb" Margin="0,140,45,0" VerticalContentAlignment="Center" Height="30" VerticalAlignment="Top" HorizontalAlignment="Right" Width="152" DisplayMemberPath="Cab"/>
+                            <TextBlock Name="WM_Cab" Text="Кабинет" IsHitTestVisible="False"  Height="17" VerticalAlignment="Top" Margin="0,147,80,0" HorizontalAlignment="Right" Width="111">
+                                <TextBlock.Style>
+                                    <Style TargetType="{x:Type TextBlock}">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Text, ElementName=Cab_Cb}" Value="">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+
+                            <Button Content="+" Click="SubjectWin" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Width="30" Height="30" Margin="0,105,10,0" HorizontalAlignment="Right" VerticalAlignment="Top"/>
+                            <Button Content="+" Click="CabWin" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Width="30" Height="30" Margin="0,140,10,0" HorizontalAlignment="Right" VerticalAlignment="Top"/>
+                            <Button Content="Добавить" Click="Teacher_Add" Margin="0,238,10,0" Height="30" VerticalAlignment="Top" HorizontalAlignment="Right" Width="187" />
+                            <Button Content="Изменить" Click="Teacher_Update" Margin="0,273,10,0" Height="30" VerticalAlignment="Top" HorizontalAlignment="Right" Width="187" />
+                            <Button Content="Удалить" Click="Teacher_Delete" Margin="0,308,10,0" HorizontalAlignment="Right" Width="187" Height="30" VerticalAlignment="Top" />
+
+                        </Grid>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Учащиеся">
+                    <Grid>
+                        <DataGrid Name="StudGrid" AutoGenerateColumns="False" Margin="10,10,270,10" IsReadOnly="True">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Binding="{Binding st_last_name}" Header="Фамилия"/>
+                                <DataGridTextColumn Binding="{Binding st_first_name}" Header="Имя"/>
+                                <DataGridTextColumn Binding="{Binding st_middle_name}" Header="Отчество"/>
+                                <DataGridTextColumn Binding="{Binding Classes.Number}" Header="Класс"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                        <Grid Margin="0,35,30,10" HorizontalAlignment="Right" Width="208">
+                            <TextBox Name="st_last_name" PreviewTextInput="Cyr_Check" Margin="0,0,10,0" VerticalContentAlignment="Center" HorizontalAlignment="Right" Width="187" Height="30" VerticalAlignment="Top"/>
+                            <TextBlock Name="WM_st_last_name" Text="Фамилия" IsHitTestVisible="False"  Height="17" VerticalAlignment="Top" Margin="0,7,80,0" HorizontalAlignment="Right" Width="111">
+                                <TextBlock.Style>
+                                    <Style TargetType="{x:Type TextBlock}">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Text, ElementName=st_last_name}" Value="">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+
+                            <TextBox Name="st_first_name" PreviewTextInput="Cyr_Check" Margin="0,35,10,0" VerticalContentAlignment="Center" HorizontalAlignment="Right" Width="187" Height="30" VerticalAlignment="Top"/>
+                            <TextBlock Name="WM_st_first_name" Text="Имя" IsHitTestVisible="False"  Height="17" VerticalAlignment="Top" Margin="0,43,80,0" HorizontalAlignment="Right" Width="111">
+                                <TextBlock.Style>
+                                    <Style TargetType="{x:Type TextBlock}">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Text, ElementName=st_first_name}" Value="">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+
+                            <TextBox Name="st_middle_name" PreviewTextInput="Cyr_Check" Margin="0,70,10,0" VerticalContentAlignment="Center" HorizontalAlignment="Right" Width="187" Height="30" VerticalAlignment="Top"/>
+                            <TextBlock Name="WM_st_middle_name" Text="Отчество" IsHitTestVisible="False"  Height="17" VerticalAlignment="Top" Margin="0,78,80,0" HorizontalAlignment="Right" Width="111">
+                                <TextBlock.Style>
+                                    <Style TargetType="{x:Type TextBlock}">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Text, ElementName=st_middle_name}" Value="">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+
+                            <ComboBox Name="ClassStud_Cb" Margin="0,105,10,0" VerticalContentAlignment="Center" HorizontalAlignment="Right" Width="187" Height="30" VerticalAlignment="Top" DisplayMemberPath="Number"/>
+
+                            <TextBlock Name="WM_ClassStud_Cb" Text="Класс" IsHitTestVisible="False"  Height="17" VerticalAlignment="Top" Margin="0,112,80,0" HorizontalAlignment="Right" Width="111">
+                                <TextBlock.Style>
+                                    <Style TargetType="{x:Type TextBlock}">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Text, ElementName=ClassStud_Cb}" Value="">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+
+                            <Button Content="Добавить" Click="Student_Add" Margin="0,238,10,0" Height="30" VerticalAlignment="Top" HorizontalAlignment="Right" Width="187" />
+                            <Button Content="Изменить" Click="Student_Update" Margin="0,273,10,0" Height="30" VerticalAlignment="Top" HorizontalAlignment="Right" Width="187" />
+                            <Button Content="Удалить" Click="Student_Delete" Margin="0,308,10,0" HorizontalAlignment="Right" Width="187" Height="30" VerticalAlignment="Top" />
+
+                        </Grid>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Классы">
+                    <Grid>
+                        <DataGrid Name="ClassGrid" AutoGenerateColumns="False" Margin="10,10,270,10" IsReadOnly="True">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Binding="{Binding Number}" Header="Класс"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                        <Grid Margin="0,35,30,10" HorizontalAlignment="Right" Width="208">
+                            <TextBox Name="Class_Number" PreviewTextInput="Class_Check" Margin="0,70,10,0" VerticalContentAlignment="Center" HorizontalAlignment="Right" Width="187" Height="30" VerticalAlignment="Top"/>
+                            <TextBlock Name="WM_class" Text="Класс" IsHitTestVisible="False"  Height="17" VerticalAlignment="Top" Margin="0,78,80,0" HorizontalAlignment="Right" Width="111">
+                                <TextBlock.Style>
+                                    <Style TargetType="{x:Type TextBlock}">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Text, ElementName=Class_Number}" Value="">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+
+                            <Button Content="Добавить" Click="Class_Add" Margin="0,238,10,0" Height="30" VerticalAlignment="Top" HorizontalAlignment="Right" Width="187" />
+                            <Button Content="Изменить" Click="Class_Update" Margin="0,273,10,0" Height="30" VerticalAlignment="Top" HorizontalAlignment="Right" Width="187" />
+                            <Button Content="Удалить" Click="Class_Delete" Margin="0,308,10,0" HorizontalAlignment="Right" Width="187" Height="30" VerticalAlignment="Top" />
+                        </Grid>
+                    </Grid>
+                </TabItem>
+            </TabControl>
+        </ScrollViewer>
     </Grid>
 </Window>

@@ -1,0 +1,34 @@
+﻿<Window x:Class="TestProg.CabWin"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TestProg"
+        mc:Ignorable="d"
+        Title="Кабинеты" Height="450" Width="348" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
+    <Grid>
+        <Grid>
+            <DataGrid Name="CabGrid" AutoGenerateColumns="False" Margin="10,10,10,122" IsReadOnly="True">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding Cab}" Header="Кабинет" Width="*"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            <Button Content="Добавить" Click="Cab_Add" IsDefault="True" Margin="30,0,222,16" Height="30" VerticalAlignment="Bottom"/>
+            <Button Content="Изменить" Click="Cab_Update" Margin="126,0,126,16" Height="30" VerticalAlignment="Bottom"/>
+            <Button Content="Удалить" Click="Cab_Delete" Margin="222,0,30,16" Height="30" VerticalAlignment="Bottom"/>
+            <TextBox Name="Cab_Number" ToolTip="В поле допускаются только цифры." PreviewTextInput="Num_Check" MaxLength="20" TextWrapping="Wrap"  Margin="30,319,29.6,0" Height="30" VerticalAlignment="Top" VerticalContentAlignment="Center"/>
+            <TextBlock Name="WM_cab" Text="Кабинет" IsHitTestVisible="False" Margin="37,326,204.6,0" Height="17" VerticalAlignment="Top">
+                <TextBlock.Style>
+                    <Style TargetType="{x:Type TextBlock}">
+                        <Setter Property="Visibility" Value="Collapsed"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Text, ElementName=Cab_Number}" Value="">
+                                <Setter Property="Visibility" Value="Visible"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
+        </Grid>
+    </Grid>
+</Window>

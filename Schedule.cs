@@ -18,7 +18,7 @@ namespace TestProg
         public int Class_Id { get; set; }
         public int Teacher_Id { get; set; }
         public Nullable<System.DateTime> date { get; set; }
-        public Nullable<System.TimeSpan> time { get; set; }
+        public string time { get; set; }
     
         public virtual Classes Classes { get; set; }
         public virtual Teachers Teachers { get; set; }
