@@ -14,8 +14,8 @@
                 </DataGrid.Columns>
             </DataGrid>
             <Button Content="Добавить" Click="Cab_Add" IsDefault="True" Margin="30,0,222,16" Height="30" VerticalAlignment="Bottom"/>
-            <Button Content="Изменить" Click="Cab_Update" Margin="126,0,126,16" Height="30" VerticalAlignment="Bottom"/>
-            <Button Content="Удалить" Click="Cab_Delete" Margin="222,0,30,16" Height="30" VerticalAlignment="Bottom"/>
+            <Button Content="Изменить" ToolTip="Для изменения информации нужно ввести в поле новый кабинет, выбрать кабинет для замены из списка и нажать на кнопку." Click="Cab_Update" Margin="126,0,126,16" Height="30" VerticalAlignment="Bottom"/>
+            <Button Content="Удалить" ToolTip="Для удаления информации нужно выбрать кабинет из списка и нажать на кнопку." Click="Cab_Delete" Margin="222,0,30,16" Height="30" VerticalAlignment="Bottom"/>
             <TextBox Name="Cab_Number" ToolTip="В поле допускаются только цифры." PreviewTextInput="Num_Check" MaxLength="20" TextWrapping="Wrap"  Margin="30,319,29.6,0" Height="30" VerticalAlignment="Top" VerticalContentAlignment="Center"/>
             <TextBlock Name="WM_cab" Text="Кабинет" IsHitTestVisible="False" Margin="37,326,204.6,0" Height="17" VerticalAlignment="Top">
                 <TextBlock.Style>

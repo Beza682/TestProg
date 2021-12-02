@@ -90,8 +90,8 @@
                             </Grid>
 
                             <Button Content="Добавить" Margin="0,238,10,0" Click="Sched_Add" Height="30" VerticalAlignment="Top" HorizontalAlignment="Right" Width="187" />
-                            <Button Content="Изменить" Margin="0,273,10,0" Click="Sched_Update" Height="30" VerticalAlignment="Top" HorizontalAlignment="Right" Width="187" />
-                            <Button Content="Удалить" Margin="0,308,10,0" Click="Sched_Delete" HorizontalAlignment="Right" Width="187" Height="30" VerticalAlignment="Top" />
+                            <Button Content="Изменить" ToolTip="Для изменения информации нужно заполнить форму, выбрать строку для замены из списка и нажать на кнопку." Margin="0,273,10,0" Click="Sched_Update" Height="30" VerticalAlignment="Top" HorizontalAlignment="Right" Width="187" />
+                            <Button Content="Удалить" ToolTip="Для удаления информации нужно выбрать строку из списка и нажать на кнопку." Margin="0,308,10,0" Click="Sched_Delete" HorizontalAlignment="Right" Width="187" Height="30" VerticalAlignment="Top" />
 
                         </Grid>
                     </Grid>
@@ -181,8 +181,8 @@
                             <Button Content="+" Click="SubjectWin" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Width="30" Height="30" Margin="0,105,10,0" HorizontalAlignment="Right" VerticalAlignment="Top"/>
                             <Button Content="+" Click="CabWin" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Width="30" Height="30" Margin="0,140,10,0" HorizontalAlignment="Right" VerticalAlignment="Top"/>
                             <Button Content="Добавить" Click="Teacher_Add" Margin="0,238,10,0" Height="30" VerticalAlignment="Top" HorizontalAlignment="Right" Width="187" />
-                            <Button Content="Изменить" Click="Teacher_Update" Margin="0,273,10,0" Height="30" VerticalAlignment="Top" HorizontalAlignment="Right" Width="187" />
-                            <Button Content="Удалить" Click="Teacher_Delete" Margin="0,308,10,0" HorizontalAlignment="Right" Width="187" Height="30" VerticalAlignment="Top" />
+                            <Button Content="Изменить" ToolTip="Для изменения информации нужно заполнить форму, выбрать строку для замены из списка и нажать на кнопку." Click="Teacher_Update" Margin="0,273,10,0" Height="30" VerticalAlignment="Top" HorizontalAlignment="Right" Width="187" />
+                            <Button Content="Удалить" ToolTip="Для удаления информации нужно выбрать строку из списка и нажать на кнопку." Click="Teacher_Delete" Margin="0,308,10,0" HorizontalAlignment="Right" Width="187" Height="30" VerticalAlignment="Top" />
 
                         </Grid>
                     </Grid>
@@ -256,8 +256,8 @@
                             </TextBlock>
 
                             <Button Content="Добавить" Click="Student_Add" Margin="0,238,10,0" Height="30" VerticalAlignment="Top" HorizontalAlignment="Right" Width="187" />
-                            <Button Content="Изменить" Click="Student_Update" Margin="0,273,10,0" Height="30" VerticalAlignment="Top" HorizontalAlignment="Right" Width="187" />
-                            <Button Content="Удалить" Click="Student_Delete" Margin="0,308,10,0" HorizontalAlignment="Right" Width="187" Height="30" VerticalAlignment="Top" />
+                            <Button Content="Изменить" ToolTip="Для изменения информации нужно заполнить форму, выбрать строку для замены из списка и нажать на кнопку." Click="Student_Update" Margin="0,273,10,0" Height="30" VerticalAlignment="Top" HorizontalAlignment="Right" Width="187" />
+                            <Button Content="Удалить" ToolTip="Для удаления информации нужно выбрать строку из списка и нажать на кнопку." Click="Student_Delete" Margin="0,308,10,0" HorizontalAlignment="Right" Width="187" Height="30" VerticalAlignment="Top" />
 
                         </Grid>
                     </Grid>
@@ -285,8 +285,8 @@
                             </TextBlock>
 
                             <Button Content="Добавить" Click="Class_Add" Margin="0,238,10,0" Height="30" VerticalAlignment="Top" HorizontalAlignment="Right" Width="187" />
-                            <Button Content="Изменить" Click="Class_Update" Margin="0,273,10,0" Height="30" VerticalAlignment="Top" HorizontalAlignment="Right" Width="187" />
-                            <Button Content="Удалить" Click="Class_Delete" Margin="0,308,10,0" HorizontalAlignment="Right" Width="187" Height="30" VerticalAlignment="Top" />
+                            <Button Content="Изменить" ToolTip="Для изменения информации нужно заполнить форму, выбрать строку для замены из списка и нажать на кнопку." Click="Class_Update" Margin="0,273,10,0" Height="30" VerticalAlignment="Top" HorizontalAlignment="Right" Width="187" />
+                            <Button Content="Удалить" ToolTip="Для удаления информации нужно выбрать строку из списка и нажать на кнопку." Click="Class_Delete" Margin="0,308,10,0" HorizontalAlignment="Right" Width="187" Height="30" VerticalAlignment="Top" />
                         </Grid>
                     </Grid>
                 </TabItem>

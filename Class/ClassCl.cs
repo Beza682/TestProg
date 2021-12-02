@@ -31,7 +31,7 @@ namespace TestProg
                 }
                 else if (class_check != null)
                 {
-                    MessageBox.Show("Данный предмет уже существует.", "Классы", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("Данный класс уже существует.", "Классы", MessageBoxButton.OK, MessageBoxImage.Error);
                     return false;
                 }
                 else
@@ -96,7 +96,7 @@ namespace TestProg
                 }
                 else if (class_check != null)
                 {
-                    MessageBox.Show("Данный предмет уже существует.", "Классы", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("Данный класс уже существует.", "Классы", MessageBoxButton.OK, MessageBoxImage.Error);
                     return false;
                 }
                 else

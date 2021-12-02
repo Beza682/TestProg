@@ -14,8 +14,8 @@
                 </DataGrid.Columns>
             </DataGrid>
             <Button Content="Добавить" Click="Subj_Add" IsDefault="True" Margin="30,0,222,16" Height="30" VerticalAlignment="Bottom"/>
-            <Button Content="Изменить" FontSize="12" Click="Subj_Update" Margin="126,0,126,16" Height="30" VerticalAlignment="Bottom"/>
-            <Button Content="Удалить" FontSize="12" Click="Subj_Delete" Margin="222,0,30,16" Height="30" VerticalAlignment="Bottom"/>
+            <Button Content="Изменить" ToolTip="Для изменения информации нужно ввести в поле новый предмет, выбрать предмет для замены из списка и нажать на кнопку." FontSize="12" Click="Subj_Update" Margin="126,0,126,16" Height="30" VerticalAlignment="Bottom"/>
+            <Button Content="Удалить" ToolTip="Для удаления информации нужно выбрать предмет из списка и нажать на кнопку." FontSize="12" Click="Subj_Delete" Margin="222,0,30,16" Height="30" VerticalAlignment="Bottom"/>
             <TextBox x:Name="Subj_Name" ToolTip="В поле допускается только кириллица." PreviewTextInput="Cyr_Check" MaxLength="20" TextWrapping="Wrap"  Margin="30,319,29.6,0" Height="30" VerticalAlignment="Top" VerticalContentAlignment="Center"/>
             <TextBlock Name="WM_subj" Text="Предмет" IsHitTestVisible="False" Margin="37,326,204.6,0" Height="17" VerticalAlignment="Top">
                 <TextBlock.Style>
