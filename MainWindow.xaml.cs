@@ -63,6 +63,11 @@ namespace TestProg
         private void Sched_Add(object sender, RoutedEventArgs e)
         {
             SchedCl schedCl = new SchedCl();
+            if (Teach_Cb.SelectedItem ==null || Class_Cb.SelectedItem == null || Subj_Cb.SelectedItem == null || Time_Cb.SelectedItem == null)
+            {
+                MessageBox.Show("Вы не полностью заполнили форму", "Расписание", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
             if (schedCl.Add(Date.SelectedDate.ToString(), Time_Cb.SelectedItem.ToString(), (Class_Cb.SelectedItem as Classes).Id, (Teach_Cb.SelectedItem as Teachers).Id) == true)
             {
                 Date.SelectedDate = null;
@@ -85,6 +90,11 @@ namespace TestProg
                 if (SchedGrid.SelectedItem == null)
                 {
                     MessageBox.Show("Вы не выбрали строку.", "Расписание", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+                if (Teach_Cb.SelectedItem == null || Class_Cb.SelectedItem == null || Subj_Cb.SelectedItem == null || Time_Cb.SelectedItem == null)
+                {
+                    MessageBox.Show("Вы не полностью заполнили форму", "Расписание", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
                 db.Schedule.Where(i => i.Id == schedule.Id).FirstOrDefault();
@@ -135,6 +145,11 @@ namespace TestProg
         private void Teacher_Add(object sender, RoutedEventArgs e)
         {
             TeachCl teachCl = new TeachCl();
+            if (SubjTeach_Cb.SelectedItem == null || Cab_Cb.SelectedItem == null)
+            {
+                MessageBox.Show("Вы не полностью заполнили форму", "Преподаватели", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
             if (teachCl.Add(tch_last_name.Text, tch_first_name.Text, tch_middle_name.Text, (SubjTeach_Cb.SelectedItem as Subjects).Id, (Cab_Cb.SelectedItem as Cabinets).Id) == true)
             {
                 SubjTeach_Cb.SelectedIndex = -1;
@@ -158,6 +173,11 @@ namespace TestProg
                 if (TeachGrid.SelectedItem == null)
                 {
                     MessageBox.Show("Вы не выбрали строку.", "Преподаватели", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+                if (SubjTeach_Cb.SelectedItem == null || Cab_Cb.SelectedItem == null)
+                {
+                    MessageBox.Show("Вы не полностью заполнили форму", "Преподаватели", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
                 db.Teachers.Where(i => i.Id == teachers.Id).FirstOrDefault();
@@ -210,6 +230,11 @@ namespace TestProg
         private void Student_Add(object sender, RoutedEventArgs e)
         {
             StudCl studCl = new StudCl();
+            if (ClassStud_Cb.SelectedItem == null)
+            {
+                MessageBox.Show("Вы не полностью заполнили форму", "Учащиеся", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
             if (studCl.Add(st_last_name.Text, st_first_name.Text, st_middle_name.Text, (ClassStud_Cb.SelectedItem as Classes).Id) == true)
             {
                 ClassStud_Cb.SelectedIndex = -1;
@@ -231,6 +256,11 @@ namespace TestProg
                 if (StudGrid.SelectedItem == null)
                 {
                     MessageBox.Show("Вы не выбрали строку.", "Ученики", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+                if (ClassStud_Cb.SelectedItem == null)
+                {
+                    MessageBox.Show("Вы не полностью заполнили форму", "Учащиеся", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
                 db.Students.Where(i => i.Id == students.Id).FirstOrDefault();

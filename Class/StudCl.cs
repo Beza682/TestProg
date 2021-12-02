@@ -18,7 +18,7 @@ namespace TestProg
                 Students students = new Students();
 
 
-                if (string.IsNullOrWhiteSpace(last) || string.IsNullOrWhiteSpace(first) || string.IsNullOrWhiteSpace(middle) || string.IsNullOrWhiteSpace(Convert.ToString(cl)))
+                if (string.IsNullOrWhiteSpace(last) || string.IsNullOrWhiteSpace(first) || string.IsNullOrWhiteSpace(middle))
                 {
                     MessageBox.Show("Вы не полностью заполнили форму", "Ученики", MessageBoxButton.OK, MessageBoxImage.Error);
                     return false;
@@ -80,7 +80,7 @@ namespace TestProg
                 int num = Convert.ToInt32(id);
                 var u_s = db.Students.Where(u => u.Id == num).FirstOrDefault();
 
-                if (string.IsNullOrWhiteSpace(last) || string.IsNullOrWhiteSpace(first) || string.IsNullOrWhiteSpace(middle) || string.IsNullOrWhiteSpace(Convert.ToString(cl)))
+                if (string.IsNullOrWhiteSpace(last) || string.IsNullOrWhiteSpace(first) || string.IsNullOrWhiteSpace(middle))
                 {
                     MessageBox.Show("Вы не полностью заполнили форму", "Ученики", MessageBoxButton.OK, MessageBoxImage.Error);
                     return false;

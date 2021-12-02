@@ -17,14 +17,18 @@ namespace TestProg
             {
                 Schedule schedule = new Schedule();
 
-                if (string.IsNullOrWhiteSpace(date) || string.IsNullOrWhiteSpace(time) || string.IsNullOrWhiteSpace(Convert.ToString(cl)) || string.IsNullOrWhiteSpace(Convert.ToString(teacher)))
+                if (string.IsNullOrWhiteSpace(date) || string.IsNullOrWhiteSpace(time))
                 {
                     MessageBox.Show("Вы не полностью заполнили форму", "Расписание", MessageBoxButton.OK, MessageBoxImage.Error);
                     return false;
                 }
+                else if (DateTime.TryParse(date, out DateTime conv_date) == false)
+                {
+                    MessageBox.Show("Дата не соответствует шаблону", "Расписание", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return false;
+                }
                 else
                 {
-                    DateTime.TryParse(date, out DateTime conv_date);
                     schedule.date = conv_date;
                     schedule.time = time;
                     schedule.Class_Id= cl;
@@ -75,9 +79,14 @@ namespace TestProg
                 int num = Convert.ToInt32(id);
                 var u_s = db.Schedule.Where(u => u.Id == num).FirstOrDefault();
 
-                if (string.IsNullOrWhiteSpace(date) || string.IsNullOrWhiteSpace(time) || string.IsNullOrWhiteSpace(Convert.ToString(cl)) || string.IsNullOrWhiteSpace(Convert.ToString(teacher)))
+                if (string.IsNullOrWhiteSpace(date) || string.IsNullOrWhiteSpace(time))
                 {
                     MessageBox.Show("Вы не полностью заполнили форму", "Расписание", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return false;
+                }
+                else if (DateTime.TryParse(date, out DateTime conv_date) == false)
+                {
+                    MessageBox.Show("Дата не соответствует шаблону", "Расписание", MessageBoxButton.OK, MessageBoxImage.Error);
                     return false;
                 }
                 else
@@ -87,7 +96,6 @@ namespace TestProg
                         MessageBox.Show("Вы не выбрали строку.", "Расписание", MessageBoxButton.OK, MessageBoxImage.Error);
                         return false;
                     }
-                    DateTime.TryParse(date, out DateTime conv_date);
                     u_s.date = conv_date;
                     u_s.time = time;
                     u_s.Class_Id = cl;
